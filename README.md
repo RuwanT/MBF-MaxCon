@@ -21,6 +21,11 @@ Please note that in the paper the Feasibility/Infeasibility function is represen
 
 ## Running the code
 
+### Simple Example - MBF-MaxCon
+Two dimentional linear fitting with synthetic data 
+> Run `MaxConMBF_simple_example.m`
+
+
 ### Synthetic data experiments - MaxCon
 Eight dim linear fitting with synthetic data - comparison and ablation studies
 > Run `maxcon_linear_demo.m`
