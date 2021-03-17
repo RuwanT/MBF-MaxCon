@@ -1,0 +1,72 @@
+function [fixed_bits, f_evals] = maxcon_BMF_trivial(method, fittingfn, nbits, minmaxfn, nsamples, q, use_local)
+    % fittingfn : Quary access to BMF
+    % nbits: Number of input bits
+    % minmaxfn: L-inf function access
+    % nsamples: Number of samples to calculate fourier coeff
+    % q: Positive Probability P(x_1 = 1)
+
+    all_bits = 1:nbits;
+    fixed_bits = [];
+    
+    f_evals = 0;
+    
+    remaining_bits = setdiff(all_bits, fixed_bits);
+    [fc, fevals] = estimate_restricted_degree1_coeff(fittingfn, nbits, fixed_bits, zeros(1, length(fixed_bits)), nsamples, q, all_bits);
+    f_evals = f_evals + fevals;
+
+    for i = 1:nbits
+
+        % Remove the basis point with max influence from the dataset 
+        [~, rbit] = max(fc);
+        
+        rbit_ = remaining_bits(rbit);
+        fc(rbit) = [];
+        remaining_bits(rbit) = [];
+        fixed_bits = [fixed_bits, rbit_];
+
+        % check for feasiability
+        x = ones(1, nbits);
+        x(fixed_bits) = 0;
+        f_value = feval(fittingfn, x);  % evaluate function value
+        if f_value == 1 % feaseable
+            break
+        end
+
+    end
+
+    % perform loca expantion
+    if use_local
+        remaining_bits = setdiff(all_bits, fixed_bits);
+        x = zeros(1, nbits);
+        x(remaining_bits) = 1;
+
+        is_sol = 1;
+        i_hold = length(remaining_bits);
+        while is_sol==1
+            [is_sol, x, i_hold, fevals] = loca_expand(fittingfn, x, [remaining_bits, fixed_bits], i_hold);
+            f_evals = f_evals + fevals;
+        end
+        
+        fixed_bits = find(x==0);
+
+    end
+
+end
+
+
+function [is_sol, alpha_n, i_hold, f_evals] = loca_expand(fittingfn, alpha_0, all_bits, i_hold)
+    f_evals = 0;
+    is_sol = 0;
+    for i = i_hold+1:length(all_bits)
+        alpha_n = alpha_0;
+        alpha_n(all_bits(i)) = 1;
+        f_value = feval(fittingfn, alpha_n);
+        f_evals = f_evals + 1;
+        if f_value == 1    %fesiable
+            is_sol = 1;
+            i_hold = i;
+            return;
+        end
+    end
+    alpha_n = alpha_0;
+end
