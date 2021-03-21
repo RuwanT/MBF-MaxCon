@@ -1,9 +1,9 @@
 function [fc, f_evals] = estimate_restricted_influences(fittingfn, nbits, restricted_bits, restriction, nsamples, cprob, S)
 % Estimate the influence of each bit in S
 % Inputs:
-%   fittingfn - 
-%   nbits - 
-%   restricted_bits - index of bits restricted to 0
+%   fittingfn - Quary access to BMF
+%   nbits - Number of input bits
+%   restricted_bits - index of bits restricted (or fixed)
 %   restriction - vector of values for restricted bits
 %   nsamples - number of function queries to be made (need to be even number)
 %   cprob - prob of sampling a 1 in generating bit vectors
@@ -24,6 +24,7 @@ function [fc, f_evals] = estimate_restricted_influences(fittingfn, nbits, restri
     
     non_restricted_bits = setdiff(1:nbits, restricted_bits);
     
+    %%% Use degree 1 fourier equations to compute influence 
     %{
     Inf = zeros(1,length(S));
     % Generate half of the samples by random sampling
@@ -60,9 +61,9 @@ function [fc, f_evals] = estimate_restricted_influences(fittingfn, nbits, restri
     fc = Inf;
     %}
     
+    %%% Use definition of influence equations to compute influence 
     % {
     Inf = zeros(nsamples,length(S));
-    % Generate half of the samples by random sampling
     for i = 1:1:nsamples
         x = zeros(1,nbits);
         x(non_restricted_bits) = randsrc(1, nbits-length(restricted_bits), [0, 1; 1-cprob, cprob]);     % random sample x

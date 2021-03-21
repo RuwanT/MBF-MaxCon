@@ -4,6 +4,7 @@ function [fixed_bits, f_evals] = maxcon_BMF(method, fittingfn, nbits, minmaxfn, 
     % minmaxfn: L-inf function access
     % nsamples: Number of samples to calculate fourier coeff
     % q: Positive Probability P(x_1 = 1)
+    % use_local: use the local expantion step if = 1
 
     all_bits = 1:nbits;
     fixed_bits = [];
@@ -36,7 +37,6 @@ function [fixed_bits, f_evals] = maxcon_BMF(method, fittingfn, nbits, minmaxfn, 
         % Remove the basis point with max influence from the dataset 
         [~, rbit] = max(fc);
         rbit = basis(rbit);
-        % rbit = remaining_bits(rbit);
         fixed_bits = [fixed_bits, rbit];
 
         % check for feasiability
