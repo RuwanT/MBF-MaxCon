@@ -1,3 +1,19 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Consensus Maximisation Using Influences of Monotone Boolean Functions
+% Proposed in
+% Tennakoon, Ruwan and Suter, David and Zhang, Erchuan and Chin, Tat-Jun 
+% and Bab-Hadiashar, Alireza "Consensus Maximisation Using Influences of 
+% Monotone Boolean Functions"
+% In Proceedings of the IEEE Conference on Computer Vision and Pattern 
+% Recognition (CVPR), 2021.
+% 
+% Copyright (c) 2021 Ruwan Tennakoon (ruwan.tennakoon@rmit.edu.au)
+% School of Computing Technologies, RMIT University, Australia
+% https://ruwant.github.io/
+% Please acknowledge the authors by citing the above paper in any academic 
+% publications that have made use of this package or part of it.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 clear all;
 close all;
 warning('off','all')
