@@ -43,9 +43,6 @@ Calculate Fourier coefficients for a toy 2D line fitting problem using different
 Calculate the error in influence estimation
 > Comparison between "uniform-sampling" and "exact" influences on a toy 2D line fitting problems Run `influence_est_accuracy.m` in MBF_basics folder
 
-> For 8-dim hyperplane Run code `maxcon_linear_EstAcc.m`
-
-> For real data (Linear Fundamental Matrix Estimation) Run code `maxcon_linear_EstAcc_fundamental.m`
 
 
 
