@@ -20,8 +20,8 @@ out_frac = .1;      % Outlier Fraction
 
 nsamples = 100;           % number of samples for fourier estimation'
 
-nruns = 10;
-out_fracs =  [ 5, 10, 15, 20, 25, 30, 35, 40 ]/N;
+nruns = 100;
+out_fracs =  [ 5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 80 ]/N;
 
 results = zeros(nruns, length(out_fracs), 8);
 results_fevals = zeros(nruns, length(out_fracs), 4);
