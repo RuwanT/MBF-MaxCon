@@ -13,7 +13,7 @@ addpath('./RANSAC');
 
 d = 8;              % model dimention
 nsamples = 100;     % number of samples for fourier estimation
-nruns = 100;        % number of random runs f the experiment
+nruns = 100;        % number of random runs of the experiment
 
 fundamental_dataset = {'104_108','198_201','417_420','579_582','738_742'};
 
