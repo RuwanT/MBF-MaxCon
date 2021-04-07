@@ -43,8 +43,8 @@ function [fixed_bits, f_evals] = maxcon_BMF(method, fittingfn, nbits, minmaxfn, 
 
         % Estimate deg-1 coeficents for basis datapoints of the restricted
         % function
-        % [fc, fevals] = estimate_restricted_degree1_coeff(fittingfn, nbits, fixed_bits, zeros(1, length(fixed_bits)), nsamples, q, basis);
-        [fc, fevals] = estimate_restricted_influences(fittingfn, nbits, fixed_bits, zeros(1, length(fixed_bits)), nsamples, q, basis);
+        [fc, fevals] = estimate_restricted_degree1_coeff(fittingfn, nbits, fixed_bits, zeros(1, length(fixed_bits)), nsamples, q, basis);
+        % [fc, fevals] = estimate_restricted_influences(fittingfn, nbits, fixed_bits, zeros(1, length(fixed_bits)), nsamples, q, basis);
         % fc = zeros(size(basis));
         % fevals = nsamples;
         

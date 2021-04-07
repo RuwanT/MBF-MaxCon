@@ -18,6 +18,8 @@ clear all;
 close all;
 warning('off','all')
 
+run('./linearASTAR/sedumi-master/install_sedumi')
+
 addpath(genpath('./data'));
 addpath('./maxcon_BMF');
 addpath('./utils');
@@ -35,7 +37,7 @@ out_var = 5.0;      % Outlier varience
 out_fracs =  [ 5, 10, 15, 20, 25, 30, 35, 40 ]/N;
 
 nsamples = 100;     % number of samples for fourier estimation
-nruns = 100;        % number of random runs f the experiment
+nruns = 5;        % number of random runs f the experiment
 
 %Hold results
 results = zeros(nruns, length(out_fracs), 22);
@@ -161,7 +163,6 @@ MBF_MaxCon_nL = results(:, :,iASTAR)- results(:, :,iBMF);
 MBF_MaxCon = results(:, :,iASTAR)- results(:, :,iBMFl);
 MBF_MaxCon_nB = results(:, :,iASTAR)- results(:, :,iBMFml);
 MBF_MaxCon_nR = results(:, :,iASTAR)- results(:, :,itrivial);
-% errorbar(out_fracs*N+.2, mean(MBF_MaxCon_nR,1), mean(MBF_MaxCon_nR,1)-quantile(MBF_MaxCon_nR,.05,1), quantile(MBF_MaxCon_nR,.95,1)-mean(MBF_MaxCon_nR,1), 'k-', 'linewidth', 2); hold on;
 plot(out_fracs*N+.2, mean(MBF_MaxCon_nR,1), 'k-', 'linewidth', 2); hold on;
 
 errorbar(out_fracs*N-.2, mean(MBF_MaxCon_nB,1), mean(MBF_MaxCon_nB,1)-quantile(MBF_MaxCon_nB,.05,1), quantile(MBF_MaxCon_nB,.95,1)-mean(MBF_MaxCon_nB,1), 'c-', 'linewidth', 2)

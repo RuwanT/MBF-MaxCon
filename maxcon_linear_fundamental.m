@@ -162,13 +162,25 @@ xlabel('${\left | \mathcal{I}_{\mathrm{A}^\ast} \right |} - {\left | \mathcal{I}
 ylabel('Probability Density','Interpreter','latex')
 set(gca,'fontsize',18)
 
-
+%%
 %%%% Figure 1 in supplimentary meterials
 figure
 subplot(1,2,1)
-y = results(:,:,1) - results(:,:,[MaxCon_nL,MaxCon]) ;
-y = squeeze(mean(y));
-bar(1:5, y )
+y_ = results(:,:,ASTAR) - results(:,:,[MaxCon_nL,MaxCon]) ;
+y = squeeze(mean(y_));
+errhigh = squeeze(quantile(y_, .95))-y;
+errlow = y-squeeze(quantile(y_,0.05));
+bar(1:5, y ); hold on
+ngroups = size(y, 1);
+nbars = size(y, 2);
+% Calculating the width for each bar group
+groupwidth = min(0.8, nbars/(nbars + 1.5));
+for i = 1:nbars
+    x = (1:ngroups) - groupwidth/2 + (2*i-1) * groupwidth / (2*nbars);
+    er = errorbar(x, y(:,i), errlow(:,i), errhigh(:,i), '.');
+    er.Color = [0 0 0];                            
+    er.LineStyle = 'none'; 
+end  
 ylabel('$\left | \mathcal{I}_{\mathrm{A}^\ast} \right | - \left | \mathcal{I}_{\bullet} \right |$','Interpreter','latex')
 xticklabels({'104-108','198-201','417-420','579-582','738-742'})
 legend('MBF-MaxCon-nL','MBF-MaxCon');
@@ -176,9 +188,21 @@ set(gca,'fontsize',18)
 xtickangle(90)
 
 subplot(1,2,2)
-y = results(:,:,[MaxCon_nL+1,MaxCon+1]) ;
-y = squeeze(mean(y));
-bar(1:5, y )
+y_ = results(:,:,[MaxCon_nL+1,MaxCon+1]) ;
+y = squeeze(mean(y_));
+errhigh = squeeze(quantile(y_, .95))-y;
+errlow = y-squeeze(quantile(y_,0.05));
+bar(1:5, y ); hold on
+ngroups = size(y, 1);
+nbars = size(y, 2);
+% Calculating the width for each bar group
+groupwidth = min(0.8, nbars/(nbars + 1.5));
+for i = 1:nbars
+    x = (1:ngroups) - groupwidth/2 + (2*i-1) * groupwidth / (2*nbars);
+    er = errorbar(x, y(:,i), errlow(:,i), errhigh(:,i), '.');
+    er.Color = [0 0 0];                            
+    er.LineStyle = 'none'; 
+end  
 ylabel('Time (s)','Interpreter','latex')
 xticklabels({'104-108','198-201','417-420','579-582','738-742'})
 legend('MBF-MaxCon-nL','MBF-MaxCon');
