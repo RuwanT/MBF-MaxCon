@@ -1,4 +1,4 @@
-function [data, th] = read_Zhipeng_data(data_file)
+function [data, th] = read_Fundamental_data(data_file)
 
 load(data_file);th = 0.03; 
 data.X1 = data.matches.X1;
