@@ -53,10 +53,11 @@ Calculate the error in influence estimation
 If you find this work useful in your research, please consider [citing](https://arxiv.org/abs/2103.04200):
 
 ```
-@article{tennakoon2021consensus,
+@inproceedings{tennakoon2021consensus,
   title={Consensus Maximisation Using Influences of Monotone Boolean Functions},
   author={Tennakoon, Ruwan and Suter, David and Zhang, Erchuan and Chin, Tat-Jun and Bab-Hadiashar, Alireza},
-  journal={arXiv preprint arXiv:2103.04200},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={2866--2875},
   year={2021}
 }
 ```
